@@ -19,6 +19,8 @@ Route::middleware(['auth'])->group(function () {
         // category section
         Route::controller(CategoryController::class)->prefix('/categories')->name('admin.categories.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
         });
 
         // don't remove below line

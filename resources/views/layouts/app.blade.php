@@ -22,6 +22,9 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('dashboard') }}/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    @stack('styles')
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -300,6 +303,9 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('dashboard') }}/js/material-dashboard.min.js?v=3.2.0"></script>
+
+    <!-- Custom Scripts -->
+    @stack('scripts')
 </body>
 
 </html>
