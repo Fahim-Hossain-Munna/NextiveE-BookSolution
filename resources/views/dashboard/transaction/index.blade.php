@@ -67,7 +67,14 @@
                                         <td class="align-middle text-center text-sm">
                                             {{ \Carbon\Carbon::parse($transaction->created_at)->format('d M Y') }}
                                         </td>
-                                        <td class="align-middle text-center">
+                                        <td class="d-flex justify-content-center align-items-center">
+                                            @if ($transaction->status == 'pending' && $transaction->is_paid == 0)
+                                                <a class="btn btn-link text-dark text-gradient px-3 mb-0"
+                                                    href="{{ route('admin.transactions.accept.transaction', $transaction->id) }}">
+                                                    <i class="material-symbols-rounded text-sm me-2">check</i>Accept Request
+                                                </a>
+                                            @endif
+
                                             <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                 href="javascript:void(0);"
                                                 onclick="deleteAction('{{ route('admin.categories.delete', $transaction->id) }}')">
@@ -77,7 +84,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="text-center">
+                                        <td colspan="6" class="text-center">
                                             <p class="text-danger" style="font-weight: bold; font-size: 12px">No
                                                 Transactions
                                                 found.</p>

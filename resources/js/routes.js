@@ -20,6 +20,22 @@ const router = createRouter({
                 layout: defaultLayout,
             },
         },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("./pages/Login.vue"),
+            meta: {
+                layout: defaultLayout,
+            },
+        },
+        {
+            path: "/register",
+            name: "register",
+            component: () => import("./pages/Register.vue"),
+            meta: {
+                layout: defaultLayout,
+            },
+        },
     ],
 });
 

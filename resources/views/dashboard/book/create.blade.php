@@ -30,8 +30,8 @@
                         <!-- Book Name -->
                         <div class="mb-3">
                             <label for="bookTitle" class="form-label">Book Title</label>
-                            <input type="text" class="form-control border px-2" id="bookTitle"
-                                placeholder="Enter category name" name="title">
+                            <input type="text" class="form-control border px-2" id="bookTitle" placeholder="Enter Title"
+                                name="title">
                         </div>
 
                         <!-- Book Short Description -->
@@ -53,8 +53,8 @@
                         <!-- Book Name -->
                         <div class="mb-3">
                             <label for="bookprice" class="form-label">Book Price</label>
-                            <input type="text" class="form-control border px-2" id="bookprice"
-                                placeholder="Enter category name" name="price">
+                            <input type="text" class="form-control border px-2" id="bookprice" placeholder="Enter Price"
+                                name="price">
                         </div>
 
                         <!-- Status -->

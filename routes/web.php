@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         // transactions section
         Route::controller(TransactionController::class)->prefix('/transactions')->name('admin.transactions.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/accept-transaction/{transaction}', 'acceptTransaction')->name('accept.transaction');
             Route::get('/delete/{transaction}', 'delete')->name('delete');
         });
 
