@@ -13,7 +13,7 @@ const router = createRouter({
             },
         },
         {
-            path: "/enrollment",
+            path: "/enrollment/:slug/:id",
             name: "enrollment",
             component: () => import("./pages/Enrollment.vue"),
             meta: {

@@ -29,6 +29,11 @@ class CategoryController extends Controller
         $extension = pathinfo($generateSrc, PATHINFO_EXTENSION);
         $mimeType = $request->thumbnail->getMimeType();
         $type = explode('/', $mimeType)[0];
+        $status = false;
+
+        if (isset($request->status) && $request->status == 1) {
+            $status = true;
+        }
 
         $media = Media::create([
             'src' => $generateSrc,
@@ -41,9 +46,24 @@ class CategoryController extends Controller
             'media_id' => $media->id,
             'title' => $request->title,
             'slug' => $request->slug,
-            'status' => $request->status ? true : false,
+            'status' => $status,
         ]);
 
         return to_route('admin.categories.index')->with('success', 'Category created successfully.');
+    }
+
+    public function delete(Category $category)
+    {
+        $media = $category->media;
+
+        if ($media) {
+            // Storage::disk('public')->delete($media->src);
+            Storage::delete($media->src);
+            $media->delete();
+        }
+
+        $category->delete();
+
+        return to_route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }

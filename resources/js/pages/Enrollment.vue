@@ -5,12 +5,9 @@
         <div class="grid md:grid-cols-2 gap-6 bg-white shadow-lg rounded-xl p-6">
             <!-- Book Info -->
             <div>
-                <img :src="book.image" alt="Book Cover" class="rounded-lg mb-4 w-full h-auto object-cover" />
+                <img :src="book.thumbnail" alt="Book Cover" class="rounded-lg mb-4 w-full h-72 object-cover" />
                 <h2 class="text-xl font-semibold text-gray-800">{{ book.title }}</h2>
-                <p class="text-sm text-gray-600 mb-2">by {{ book.author }}</p>
-                <p class="text-gray-700 text-sm mb-4">
-                    {{ book.description }}
-                </p>
+                <p class="text-sm text-gray-600 mb-2">by {{ book.author?.name }}</p>
                 <div class="text-lg font-bold text-blue-600">${{ book.price }}</div>
             </div>
 
@@ -18,37 +15,32 @@
             <form @submit.prevent="handlePurchase" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <input v-model="form.name" type="text" placeholder="Your full name"
-                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200"
-                        required />
+                    <input v-model="form.full_name" type="text" placeholder="Your full name"
+                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200" />
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <input v-model="form.email" type="email" placeholder="you@example.com"
-                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200"
-                        required />
+                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200" />
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
-                    <input v-model="form.cardNumber" type="text" placeholder="1234 5678 9012 3456"
-                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200"
-                        required />
+                    <input v-model="form.card_number" type="text" placeholder="1234 5678 9012 3456"
+                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200" />
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Expiry</label>
-                        <input v-model="form.expiry" type="text" placeholder="MM/YY"
-                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200"
-                            required />
+                        <input v-model="form.expiry" type="text" placeholder="MM/YY" @input="formatExpiry"
+                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200" />
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">CVC</label>
                         <input v-model="form.cvc" type="text" placeholder="123"
-                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200"
-                            required />
+                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-200" />
                     </div>
                 </div>
 
@@ -62,26 +54,61 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router';
+import Swal from 'sweetalert2';
 
-const book = {
-    title: 'Mastering Vue 3',
-    author: 'Fahim Hossain Munna',
-    price: 12.99,
-    image: 'https://placehold.co/400x300?text=E-Book+Cover',
-    description: 'Learn Vue 3 with hands-on examples, Composition API, and modern best practices.',
-}
+const route = useRoute();
+const book = ref({});
+
+onMounted(async () => {
+    try {
+        const response = await axios.get(`/book/${route.params.id}`); // Replace with actual book ID or slug
+        book.value = response.data?.data;
+    } catch (error) {
+        console.error('Error fetching book details:', error);
+    }
+});
 
 const form = reactive({
-    name: '',
+    full_name: '',
     email: '',
-    cardNumber: '',
+    card_number: '',
     expiry: '',
     cvc: '',
 })
 
-const handlePurchase = () => {
-    alert(`Thank you, ${form.name}! You’ve purchased "${book.title}" for $${book.price}.`)
-    // You can replace this alert with actual API call or Vue Router redirect
+const formatExpiry = (event) => {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+        value = value.slice(0, 2) + '/' + value.slice(2, 4);
+    }
+    form.expiry = value;
+};
+
+const handlePurchase = async () => {
+    try {
+        const response = await axios.post('/transaction', {
+            ...form,
+            book_id: book.value.id,
+        });
+    } catch (error) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "error",
+            title: "Error processing payment. Please try again.",
+        });
+
+    }
 }
 </script>
