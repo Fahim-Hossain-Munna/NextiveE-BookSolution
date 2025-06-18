@@ -19,7 +19,7 @@ class LoginController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password) || !$user->is_admin || !$user->type != 'admin') {
+        if (!$user || !Hash::check($request->password, $user->password) || !$user->is_admin) {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ])->onlyInput('email');

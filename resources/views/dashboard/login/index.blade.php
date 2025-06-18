@@ -39,7 +39,7 @@
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <input type="email" id="form2Example17"
                                                 class="form-control form-control-lg mb-2" name="email"
-                                                value="{{ old('email') }}" />
+                                                value="{{ old('email') ?? 'admin@fhmbookstore.dev' }}" />
                                             <label class="form-label mb-1" for="form2Example17">Email address</label>
                                             @error('email')
                                                 <p class="text-danger" style="font-size: 10px;">{{ $message }}</p>
@@ -49,7 +49,7 @@
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <input type="password" id="form2Example27"
                                                 class="form-control form-control-lg mb-2" name="password"
-                                                value="{{ old('password') }}" />
+                                                value="{{ old('password') ?? 'secret' }}" />
                                             <label class="form-label mb-1" for="form2Example27">Password</label>
                                             @error('password')
                                                 <p class="text-danger" style="font-size: 10px;">{{ $message }}</p>

@@ -41,8 +41,8 @@ import { useAuthStore } from '@/store/authStore'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
-const email = ref('')
-const password = ref('')
+const email = ref('user@fhmbookstore.dev')
+const password = ref('secret')
 const router = useRouter()
 const authStore = useAuthStore()
 
