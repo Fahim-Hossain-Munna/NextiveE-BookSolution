@@ -23,24 +23,23 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'type' => 'admin',
+            'is_admin' => true,
         ]);
 
-        // Redirect to the login page with success message
         return to_route('admin.login')->with('success', 'Registration successful! Please log in.');
     }
 
     public function logout(Request $request)
     {
-        // Log out the user
         Auth::logout();
-
+        
         // Invalidate the session
         $request->session()->invalidate();
 
         // Regenerate the CSRF token
         $request->session()->regenerateToken();
 
-        // Redirect to the login page with success message
         return to_route('admin.login')->with('success', 'Logged out successfully!');
     }
 }

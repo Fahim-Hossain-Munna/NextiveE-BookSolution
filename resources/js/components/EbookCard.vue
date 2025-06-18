@@ -24,6 +24,10 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../store/authStore';
+import Swal from 'sweetalert2';
+
+const authStore = useAuthStore();
 const router = useRouter();
 
 let props = defineProps({
@@ -32,6 +36,26 @@ let props = defineProps({
 
 
 const purchaseBook = ($slug, $id) => {
+
+    if (!authStore.token) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "warning",
+            title: "You need to log in to purchase this book. Please log in to continue."
+        });
+        router.push('/login');
+        return;
+    }
     router.push(`/enrollment/${$slug}/${$id}`);
 };
 </script>

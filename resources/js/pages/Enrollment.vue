@@ -57,13 +57,21 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router';
 import Swal from 'sweetalert2';
+import { useAuthStore } from '@/store/authStore';
 
 const route = useRoute();
 const book = ref({});
+const authStore = useAuthStore();
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/book/${route.params.id}`); // Replace with actual book ID or slug
+        const response = await axios.get(`/book/${route.params.id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `${authStore.token}`,
+            },
+        });
         book.value = response.data?.data;
     } catch (error) {
         console.error('Error fetching book details:', error);
@@ -91,6 +99,12 @@ const handlePurchase = async () => {
         const response = await axios.post('/transaction', {
             ...form,
             book_id: book.value.id,
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `${authStore.token}`,
+            },
         });
         const Toast = Swal.mixin({
             toast: true,

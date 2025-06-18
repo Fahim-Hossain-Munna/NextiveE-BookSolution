@@ -12,5 +12,9 @@ Route::post('register', [AuthenticationController::class, 'register']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/books', [BookController::class, 'index']);
-Route::get('/book/{id}', [BookController::class, 'show']);
-Route::post('/transaction', [TransactionController::class, 'store']);
+
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/book/{id}', [BookController::class, 'show']);
+    Route::post('/transaction', [TransactionController::class, 'store']);
+});

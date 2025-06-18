@@ -2,115 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('dashboard') }}/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="{{ asset('dashboard') }}/img/favicon.png">
-    <title>
-        My Project
-    </title>
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('dashboard') }}/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Material Icons -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('dashboard') }}/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FHM Book Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
 </head>
 
-<body class="bg-gray-200">
+<body>
 
-    <main class="main-content  mt-0">
-        <div class="page-header align-items-start min-vh-100"
-            style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-            <div class="container my-auto">
-                <div class="row">
-                    <div class="col-lg-4 col-md-8 col-12 mx-auto">
-                        <div class="card z-index-0 fadeIn3 fadeInBottom">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-                                    <div class="row mt-3">
-                                        <div class="col-2 text-center ms-auto">
-                                            <a class="btn btn-link px-3" href="javascript:;">
-                                                <i class="fa fa-facebook text-white text-lg"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-2 text-center px-1">
-                                            <a class="btn btn-link px-3" href="javascript:;">
-                                                <i class="fa fa-github text-white text-lg"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-2 text-center me-auto">
-                                            <a class="btn btn-link px-3" href="javascript:;">
-                                                <i class="fa fa-google text-white text-lg"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+    <section class="vh-100" style="background-color: #FBFBFB;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                                    alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                             </div>
-                            <div class="card-body">
-                                <form action="{{ route('admin.login') }}" method="post" role="form"
-                                    class="text-start">
-                                    @csrf
-                                    <div class="input-group input-group-outline my-2">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email"
-                                            value="{{ old('email') }}">
-                                    </div>
-                                    @error('email')
-                                        <p class="text-danger" style="font-size: 10px;">{{ $message }}</p>
-                                    @enderror
-                                    <div class="input-group input-group-outline mb-2">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password"
-                                            value="{{ old('password') }}">
-                                    </div>
-                                    @error('password')
-                                        <p class="text-danger" style="font-size: 10px;">{{ $message }}</p>
-                                    @enderror
-                                    <div class="text-center">
-                                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign
-                                            in</button>
-                                    </div>
-                                    <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
-                                        <a href="{{ route('admin.register') }}"
-                                            class="text-primary text-gradient font-weight-bold">Sign up</a>
-                                    </p>
-                                </form>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                    <form action="{{ route('admin.login') }}" method="post">
+                                        @csrf
+                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                            <span class="h1 fw-bold mb-0">FHM Book Store</span>
+                                        </div>
+
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
+                                            account</h5>
+
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <input type="email" id="form2Example17"
+                                                class="form-control form-control-lg mb-2" name="email"
+                                                value="{{ old('email') }}" />
+                                            <label class="form-label mb-1" for="form2Example17">Email address</label>
+                                            @error('email')
+                                                <p class="text-danger" style="font-size: 10px;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <input type="password" id="form2Example27"
+                                                class="form-control form-control-lg mb-2" name="password"
+                                                value="{{ old('password') }}" />
+                                            <label class="form-label mb-1" for="form2Example27">Password</label>
+                                            @error('password')
+                                                <p class="text-danger" style="font-size: 10px;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="pt-1 mb-4">
+                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                        </div>
+
+                                        <a class="small text-muted" href="#!">Forgot password?</a>
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="{{ route('admin.register') }}" style="color: #393f81;">Register
+                                                here</a></p>
+                                    </form>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('dashboard') }}/js/core/popper.min.js"></script>
-    <script src="{{ asset('dashboard') }}/js/core/bootstrap.min.js"></script>
-    <script src="{{ asset('dashboard') }}/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="{{ asset('dashboard') }}/js/plugins/smooth-scrollbar.min.js"></script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
     </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('dashboard') }}/js/material-dashboard.min.js?v=3.2.0"></script>
+</body>
 </body>
 
 </html>

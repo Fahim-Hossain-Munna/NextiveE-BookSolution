@@ -38,8 +38,9 @@ class AuthenticationController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'type' => 'user',
+                'is_admin' => false,
             ]);
-
 
             $token = JWTAuth::fromUser($user);
 

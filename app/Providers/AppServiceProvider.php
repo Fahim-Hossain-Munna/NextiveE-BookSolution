@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\SentBookEvent;
 use App\Listeners\SentBookListener;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 

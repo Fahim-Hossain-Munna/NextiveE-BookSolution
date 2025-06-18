@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import defaultLayout from "./layouts/Default.vue";
+import simpleLayout from "./layouts/Simple.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -25,7 +26,7 @@ const router = createRouter({
             name: "login",
             component: () => import("./pages/Login.vue"),
             meta: {
-                layout: defaultLayout,
+                layout: simpleLayout,
             },
         },
         {
@@ -33,7 +34,7 @@ const router = createRouter({
             name: "register",
             component: () => import("./pages/Register.vue"),
             meta: {
-                layout: defaultLayout,
+                layout: simpleLayout,
             },
         },
     ],
