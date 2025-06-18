@@ -65,3 +65,10 @@ php artisan serve
 npm install
 npm run dev
 ```
+
+## Link Storage Path
+
+```
+FILESYSTEM_DISK=public
+php artisan storage:link
+``
